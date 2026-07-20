@@ -1,0 +1,153 @@
+/* =========================================================
+   CTA, FORMULÁRIO E RODAPÉ
+   ---------------------------------------------------------
+   Eu concentro neste módulo a conversão final, os estados do formulário e o rodapé.
+========================================================= */
+
+/* =========================================================
+   12. CTA, FORMULÁRIO E RODAPÉ
+========================================================= */
+
+.dc-cta-section {
+  position: relative;
+  padding: 128px 20px 104px;
+  overflow: hidden;
+}
+
+.dc-cta-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(50% 65% at 50% 50%, rgba(157, 78, 221, 0.2), transparent 70%),
+    radial-gradient(30% 40% at 80% 60%, rgba(46, 230, 214, 0.08), transparent 70%);
+}
+
+.dc-cta-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 430px;
+  gap: 68px;
+  align-items: center;
+  width: min(1080px, 100%);
+  margin: auto;
+}
+
+.dc-cta-copy h2 {
+  margin: 0 0 18px;
+  color: var(--dc-text-strong);
+  font-family: var(--dc-mono);
+  font-size: clamp(1.9rem, 4.4vw, 3.25rem);
+  line-height: 1.12;
+}
+
+.dc-cta-copy > p {
+  max-width: 540px;
+  margin: 0 0 30px;
+  color: var(--dc-text-dim);
+  line-height: 1.7;
+}
+
+.dc-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.dc-benefits span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.68rem;
+}
+
+.dc-benefits svg {
+  color: var(--dc-green);
+}
+
+.dc-form {
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow:
+    0 28px 70px -36px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.dc-form h3 {
+  margin: 0 0 21px;
+  color: var(--dc-cyan);
+  font-family: var(--dc-mono);
+  font-size: 1rem;
+}
+
+.dc-form label {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 14px;
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.68rem;
+}
+
+.dc-form input,
+.dc-form select {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid var(--dc-border);
+  border-radius: 8px;
+  outline: none;
+  color: var(--dc-text);
+  background: var(--dc-panel-2);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.dc-form input:focus,
+.dc-form select:focus {
+  border-color: var(--dc-cyan);
+  box-shadow: 0 0 0 3px rgba(46, 230, 214, 0.1);
+}
+
+.dc-submit-button {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.dc-form-message {
+  margin: 14px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.dc-form-message.is-success {
+  color: var(--dc-green);
+}
+
+.dc-form-message.is-error {
+  color: var(--dc-red);
+}
+
+.dc-form > small {
+  display: block;
+  margin-top: 12px;
+  color: var(--dc-text-dim);
+  font-size: 0.68rem;
+  line-height: 1.5;
+}
+
+.dc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 34px 20px 42px;
+  border-top: 1px solid var(--dc-border);
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.67rem;
+  text-align: center;
+}

@@ -1,0 +1,129 @@
+/* =========================================================
+   TOKENS E FUNDAÇÃO GLOBAL
+   ---------------------------------------------------------
+   Eu centralizo aqui as variáveis, o reset mínimo e a estrutura global da página. Alterações de identidade visual começam neste arquivo.
+========================================================= */
+
+/* =========================================================
+   1. TOKENS E ESTRUTURA GLOBAL
+========================================================= */
+
+:root {
+  --dc-bg: #0a0e1a;
+  --dc-bg-deep: #050916;
+  --dc-panel: #11162a;
+  --dc-panel-2: #161c33;
+  --dc-panel-glass: rgba(17, 22, 42, 0.78);
+  --dc-border: #242c4a;
+  --dc-border-soft: rgba(122, 143, 210, 0.2);
+  --dc-text: #c8d3f5;
+  --dc-text-strong: #f2f5ff;
+  --dc-text-dim: #7d86ad;
+  --dc-pink: #ff2e88;
+  --dc-cyan: #2ee6d6;
+  --dc-purple: #9d4edd;
+  --dc-yellow: #ffd166;
+  --dc-green: #5fffa0;
+  --dc-red: #ff6b6b;
+  --dc-header-height: 82px;
+  --dc-header-height-mobile: 72px;
+  --dc-container: 1180px;
+  --dc-radius-sm: 10px;
+  --dc-radius-md: 16px;
+  --dc-radius-lg: 24px;
+  --dc-shadow: 0 24px 70px -35px rgba(0, 0, 0, 0.9);
+  --dc-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  --dc-sans: "Sora", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: calc(var(--dc-header-height) + 20px);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+button {
+  border: 0;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  color: var(--dc-bg-deep);
+  background: var(--dc-cyan);
+}
+
+.dc-no-scroll {
+  overflow: hidden;
+}
+
+.dc-page {
+  min-height: 100vh;
+  color: var(--dc-text);
+  background:
+    radial-gradient(circle at 50% -10%, rgba(57, 86, 177, 0.14), transparent 34%),
+    var(--dc-bg);
+  font-family: var(--dc-sans);
+}
+
+/*
+ * Eu aplico a animação apenas ao conteúdo. Header e navegações fixas
+ * ficam fora deste elemento para preservar o contexto da viewport.
+ */
+.dc-page__content {
+  opacity: 0;
+  transform: scale(0.992);
+}
+
+.dc-page__content.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.72s ease,
+    transform 0.72s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dc-main {
+  padding-top: var(--dc-header-height);
+}
+
+.dc-container {
+  width: min(var(--dc-container), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.dc-section,
+.dc-cta-section,
+.dc-hero {
+  scroll-margin-top: calc(var(--dc-header-height) + 20px);
+}
+
+.dc-section {
+  position: relative;
+  padding-block: 112px;
+}
+
+.dc-section--full {
+  overflow: hidden;
+}

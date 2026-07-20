@@ -1,0 +1,193 @@
+/* =========================================================
+   ALUNOS, EMPRESAS E TUTORES
+   ---------------------------------------------------------
+   Eu agrupo aqui os elementos de prova social demonstrativa: depoimentos, marquee e equipe.
+========================================================= */
+
+/* =========================================================
+   11. ALUNOS, EMPRESAS E TUTORES
+========================================================= */
+
+.dc-student-scroll {
+  display: flex;
+  gap: 18px;
+  width: min(100%, calc((100vw - var(--dc-container)) / 2 + var(--dc-container)));
+  margin-left: max(20px, calc((100vw - var(--dc-container)) / 2));
+  padding: 2px 22px 18px 2px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--dc-border) transparent;
+  scrollbar-width: thin;
+}
+
+.dc-student-card {
+  min-width: 315px;
+  max-width: 315px;
+  padding: 21px;
+  border-radius: 15px;
+  scroll-snap-align: start;
+  --accent: var(--student-color);
+}
+
+.dc-student-card__header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 15px;
+}
+
+.dc-avatar {
+  display: grid;
+  width: 43px;
+  height: 43px;
+  flex: 0 0 43px;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 50%;
+  color: var(--student-color, var(--tutor-color));
+  background: color-mix(in srgb, currentColor 12%, var(--dc-panel-2));
+  font-family: var(--dc-mono);
+  font-size: 0.77rem;
+  font-weight: 800;
+  position: relative;   /* novo: ponto de referência pro overlay duotone */
+  overflow: hidden;     /* novo: recorta a foto em círculo de verdade */
+}
+
+/* novo: a foto preenche o círculo inteiro, sem distorcer */
+.dc-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.55) contrast(1.1) brightness(0.95);
+}
+
+/* novo: tinge a foto com a cor do card (duotone), deixando o visual
+   claramente estilizado/demonstrativo em vez de "foto real solta" */
+.dc-avatar.is-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  mix-blend-mode: color;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.dc-student-card h3 {
+  margin: 0 0 4px;
+  color: var(--dc-text-strong);
+  font-size: 0.92rem;
+}
+
+.dc-student-card__header span,
+.dc-student-card > small {
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.64rem;
+}
+
+.dc-commit-message {
+  margin-bottom: 14px;
+  padding: 7px 10px;
+  border: 1px solid var(--dc-border);
+  border-radius: 7px;
+  color: var(--student-color);
+  background: rgba(22, 28, 51, 0.78);
+  font-family: var(--dc-mono);
+  font-size: 0.69rem;
+}
+
+.dc-student-card__quote {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  margin: 0 0 15px;
+  color: var(--dc-text);
+}
+
+.dc-student-card__quote svg {
+  margin-top: 4px;
+  color: var(--student-color);
+}
+
+.dc-student-card__quote p {
+  margin: 0;
+  font-size: 0.83rem;
+  line-height: 1.58;
+}
+
+.dc-student-card > small strong {
+  color: var(--dc-text);
+}
+
+.dc-marquee-shell {
+  overflow: hidden;
+  opacity: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.dc-marquee-shell.is-visible {
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+.dc-marquee {
+  display: inline-flex;
+  min-width: max-content;
+  animation: dc-marquee 26s linear infinite;
+}
+
+.dc-marquee-shell:hover .dc-marquee {
+  animation-play-state: paused;
+}
+
+.dc-marquee span {
+  padding: 0 30px;
+  border-right: 1px solid var(--dc-border);
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.dc-code-title span {
+  color: var(--dc-text-dim);
+}
+
+.dc-code-title strong {
+  color: var(--dc-cyan);
+  font-weight: inherit;
+}
+
+.dc-tutor-card {
+  min-height: 300px;
+  --accent: var(--tutor-color);
+}
+
+.dc-tutor-card .dc-avatar {
+  margin-bottom: 15px;
+  color: var(--tutor-color);
+}
+
+.dc-tutor-card > strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--tutor-color);
+  font-family: var(--dc-mono);
+  font-size: 0.7rem;
+}
+
+.dc-tutor-card small {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.65rem;
+  line-height: 1.55;
+}
+
+.dc-tutor-card p {
+  color: var(--dc-text);
+  font-style: italic;
+}

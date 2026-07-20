@@ -1,0 +1,105 @@
+/* =========================================================
+   QUEM SOMOS E METODOLOGIA
+   ---------------------------------------------------------
+   Eu mantenho a narrativa de transformação e a metodologia em um módulo próprio porque elas compartilham o mesmo contexto visual.
+========================================================= */
+
+/* =========================================================
+   7. QUEM SOMOS E METODOLOGIA
+========================================================= */
+
+.dc-diff-card {
+  max-width: 920px;
+  padding: 28px 24px;
+  border-radius: 14px;
+}
+
+.dc-diff-line {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 7px;
+  padding-left: 14px;
+  border-left: 3px solid transparent;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition:
+    opacity 0.5s ease var(--delay),
+    transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) var(--delay),
+    border-color 0.5s ease var(--delay);
+}
+
+.dc-diff-line.is-visible {
+  border-left-color: var(--diff-color);
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.dc-diff-line__sign {
+  width: 14px;
+  flex: 0 0 14px;
+  color: var(--diff-color);
+}
+
+.dc-diff-line span {
+  font-family: var(--dc-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.dc-diff-line--del span:last-child {
+  color: var(--dc-text-dim);
+  text-decoration: line-through;
+}
+
+.dc-diff-card + .dc-section-text {
+  margin-top: 28px;
+}
+
+.dc-method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.dc-method-card {
+  position: relative;
+  min-height: 190px;
+  padding: 22px 20px;
+  overflow: hidden;
+  border: 1px solid rgba(46, 230, 214, 0.16);
+  border-top: 2px solid var(--dc-cyan);
+  border-radius: 0 0 13px 13px;
+  background: linear-gradient(180deg, rgba(46, 230, 214, 0.075), rgba(17, 22, 42, 0.8));
+}
+
+.dc-method-card::after {
+  content: "";
+  position: absolute;
+  top: -35px;
+  right: -35px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--dc-cyan);
+  filter: blur(48px);
+  opacity: 0.08;
+}
+
+.dc-method-card__number {
+  color: var(--dc-cyan);
+  font-family: var(--dc-mono);
+  font-size: 0.72rem;
+}
+
+.dc-method-card h4 {
+  margin: 15px 0 9px;
+  color: var(--dc-text-strong);
+  font-size: 0.98rem;
+}
+
+.dc-method-card p {
+  margin: 0;
+  color: var(--dc-text-dim);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}

@@ -1,0 +1,223 @@
+/* =========================================================
+   HEADER E NAVEGAÇÕES FIXAS
+   ---------------------------------------------------------
+   Eu isolo o header porque ele possui regras próprias de posicionamento, estado após scroll, menu mobile e navegação lateral.
+========================================================= */
+
+/* =========================================================
+   3. HEADER FIXO E NAVEGAÇÕES
+========================================================= */
+
+.dc-site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 1000;
+  height: var(--dc-header-height);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(90deg, rgba(95, 255, 160, 0.055), transparent 25%, transparent 75%, rgba(46, 230, 214, 0.05)),
+    rgba(5, 11, 25, 0.78);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(20px) saturate(1.18);
+  -webkit-backdrop-filter: blur(20px) saturate(1.18);
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.dc-site-header.is-scrolled {
+  border-bottom-color: rgba(95, 255, 160, 0.16);
+  background: rgba(5, 11, 25, 0.94);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.36);
+}
+
+.dc-site-header::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--dc-green), var(--dc-cyan), transparent);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+.dc-site-header__inner {
+  display: grid;
+  grid-template-columns: 176px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  width: min(1320px, calc(100% - 36px));
+  height: 100%;
+  margin-inline: auto;
+}
+
+/*
+ * A marca original é horizontal. Eu preservo sua proporção em vez de
+ * encaixá-la em um quadrado, o que deixava o nome praticamente ilegível.
+ */
+.dc-site-brand {
+  display: inline-flex;
+  align-items: center;
+  width: 170px;
+  height: 56px;
+  overflow: hidden;
+  border: 1px solid rgba(95, 255, 160, 0.24);
+  border-radius: 13px;
+  background: rgba(21, 12, 29, 0.78);
+  box-shadow:
+    0 0 24px rgba(95, 255, 160, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dc-site-brand:hover {
+  transform: translateY(-2px);
+  border-color: rgba(95, 255, 160, 0.52);
+  box-shadow: 0 0 30px rgba(95, 255, 160, 0.14);
+}
+
+.dc-site-brand__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.dc-site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(7px, 1vw, 16px);
+  min-width: 0;
+}
+
+.dc-site-nav > a:not(.dc-site-header__cta) {
+  position: relative;
+  padding: 30px 2px 27px;
+  color: rgba(239, 243, 255, 0.84);
+  font-size: clamp(0.66rem, 0.72vw, 0.78rem);
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.dc-site-nav > a:not(.dc-site-header__cta)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--dc-green);
+  box-shadow: 0 0 12px rgba(95, 255, 160, 0.7);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+
+.dc-site-nav > a:not(.dc-site-header__cta):hover,
+.dc-site-nav > a:not(.dc-site-header__cta).is-active {
+  color: var(--dc-green);
+}
+
+.dc-site-nav > a:not(.dc-site-header__cta):hover::after,
+.dc-site-nav > a:not(.dc-site-header__cta).is-active::after {
+  transform: scaleX(1);
+}
+
+.dc-site-header__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 8px 18px 8px 8px;
+  border: 1px solid rgba(95, 255, 160, 0.55);
+  border-radius: 11px;
+  color: #06130b;
+  background: linear-gradient(135deg, #5fffa0, #25cf68);
+  box-shadow:
+    0 10px 28px rgba(37, 207, 104, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  font-family: var(--dc-mono);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.22s ease,
+    filter 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.dc-site-header__cta > span {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(3, 112, 35, 0.18);
+}
+
+.dc-site-header__cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: 0 14px 34px rgba(37, 207, 104, 0.32);
+}
+
+.dc-site-header__cta--mobile {
+  display: none;
+}
+
+.dc-site-menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(95, 255, 160, 0.28);
+  border-radius: 10px;
+  color: var(--dc-green);
+  background: rgba(95, 255, 160, 0.08);
+  cursor: pointer;
+}
+
+.dc-side-nav {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transform: translateY(-50%);
+}
+
+.dc-side-nav a {
+  width: 9px;
+  height: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  background: #2e3457;
+  transition:
+    transform 0.22s ease,
+    background 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.dc-side-nav a:hover,
+.dc-side-nav a.is-active {
+  background: var(--dc-cyan);
+  box-shadow: 0 0 12px var(--dc-cyan);
+  transform: scale(1.3);
+}

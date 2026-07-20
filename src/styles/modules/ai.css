@@ -1,0 +1,433 @@
+/* =========================================================
+   INTELIGÊNCIA ARTIFICIAL
+   ---------------------------------------------------------
+   Eu trato a seção de IA como uma experiência visual independente, com composição, preview, estados flutuantes e movimento controlado.
+========================================================= */
+
+/* =========================================================
+   10. INTELIGÊNCIA ARTIFICIAL
+========================================================= */
+
+.dc-ai-section {
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(7, 12, 27, 0.98), var(--dc-bg));
+}
+
+.dc-ai-section__background {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 78% 36%, rgba(61, 96, 255, 0.2), transparent 30%),
+    radial-gradient(circle at 88% 62%, rgba(157, 78, 221, 0.18), transparent 27%),
+    radial-gradient(circle at 12% 22%, rgba(46, 230, 214, 0.08), transparent 28%);
+}
+
+.dc-ai-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(76, 104, 190, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(76, 104, 190, 0.16) 1px, transparent 1px);
+  background-size: 38px 38px;
+  -webkit-mask-image:
+    linear-gradient(90deg, #000 0%, #000 78%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, #000 0%, #000 78%, transparent 100%),
+    linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.dc-ai-section__container {
+  position: relative;
+  z-index: 1;
+}
+
+.dc-ai-section__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
+  gap: clamp(48px, 6vw, 82px);
+  align-items: center;
+}
+
+.dc-ai-section__content {
+  min-width: 0;
+}
+
+.dc-ai-section__content .dc-section-title {
+  max-width: 760px;
+  margin-bottom: 22px;
+}
+
+.dc-ai-section__content .dc-section-title span {
+  color: transparent;
+  background: linear-gradient(90deg, var(--dc-cyan), #75a7ff, var(--dc-purple));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.dc-ai-section__description {
+  margin-bottom: 34px;
+}
+
+.dc-ai-resources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.dc-ai-resource-card {
+  position: relative;
+  display: flex;
+  gap: 14px;
+  min-height: 164px;
+  padding: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(70, 88, 145, 0.55);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(22, 28, 51, 0.9), rgba(11, 17, 36, 0.78));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(14px);
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dc-ai-resource-card::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--dc-cyan);
+  filter: blur(60px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.dc-ai-resource-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(46, 230, 214, 0.48);
+  box-shadow: 0 22px 46px -32px rgba(46, 230, 214, 0.95);
+}
+
+.dc-ai-resource-card:hover::before {
+  opacity: 0.13;
+}
+
+.dc-ai-resource-card__icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border: 1px solid rgba(46, 230, 214, 0.3);
+  border-radius: 13px;
+  color: var(--dc-cyan);
+  background: linear-gradient(145deg, rgba(46, 230, 214, 0.13), rgba(46, 230, 214, 0.04));
+}
+
+.dc-ai-resource-card__content {
+  position: relative;
+  z-index: 1;
+}
+
+.dc-ai-resource-card h3 {
+  margin: 1px 0 8px;
+  color: var(--dc-text-strong);
+  font-size: 0.93rem;
+  line-height: 1.35;
+}
+
+.dc-ai-resource-card p {
+  margin: 0;
+  color: var(--dc-text-dim);
+  font-size: 0.78rem;
+  line-height: 1.62;
+}
+
+.dc-ai-responsibility {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 19px 21px;
+  border: 1px solid rgba(95, 255, 160, 0.25);
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgba(95, 255, 160, 0.07), rgba(95, 255, 160, 0.025));
+}
+
+.dc-ai-responsibility__icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border-radius: 12px;
+  color: var(--dc-green);
+  background: rgba(95, 255, 160, 0.1);
+}
+
+.dc-ai-responsibility strong {
+  color: var(--dc-text-strong);
+  font-size: 0.9rem;
+}
+
+.dc-ai-responsibility p {
+  margin: 6px 0 0;
+  color: var(--dc-text-dim);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.dc-ai-section__visual {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  place-items: center;
+}
+
+.dc-ai-section__visual-glow {
+  position: absolute;
+  z-index: -1;
+  width: 88%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(75, 91, 255, 0.34), rgba(46, 230, 214, 0.12) 46%, transparent 72%);
+  filter: blur(38px);
+  opacity: 0.9;
+  animation: dc-ai-glow 5s ease-in-out infinite;
+}
+
+.dc-ai-preview {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 520px);
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(93, 111, 191, 0.48);
+  border-radius: 24px;
+  background: rgba(8, 14, 32, 0.78);
+  box-shadow:
+    0 35px 75px -34px rgba(0, 0, 0, 0.95),
+    0 0 45px rgba(64, 84, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(18px) saturate(1.2);
+  transform: perspective(1100px) rotateY(-4deg) rotateX(1.5deg);
+  transition:
+    transform 0.4s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.dc-ai-preview:hover {
+  transform: perspective(1100px) rotateY(0) rotateX(0) translateY(-4px);
+  border-color: rgba(46, 230, 214, 0.52);
+  box-shadow:
+    0 40px 85px -34px rgba(0, 0, 0, 0.98),
+    0 0 55px rgba(46, 230, 214, 0.18);
+}
+
+.dc-ai-preview__header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 13px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(70, 88, 145, 0.38);
+  background: rgba(16, 23, 47, 0.9);
+}
+
+.dc-ai-preview__controls {
+  display: flex;
+  gap: 6px;
+}
+
+.dc-ai-preview__controls span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dc-ai-preview__controls span:nth-child(1) {
+  background: var(--dc-red);
+}
+
+.dc-ai-preview__controls span:nth-child(2) {
+  background: var(--dc-yellow);
+}
+
+.dc-ai-preview__controls span:nth-child(3) {
+  background: var(--dc-green);
+}
+
+.dc-ai-preview__header small {
+  overflow: hidden;
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.62rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dc-ai-preview__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dc-green);
+  font-family: var(--dc-mono);
+  font-size: 0.58rem;
+}
+
+.dc-ai-preview__status i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dc-green);
+  box-shadow: 0 0 8px var(--dc-green);
+}
+
+.dc-ai-preview__image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.dc-ai-preview__image {
+  display: block;
+  width: 100%;
+  height: 80%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transform: scale(1.015);
+  transition:
+    transform 0.6s ease,
+    filter 0.6s ease;
+}
+
+.dc-ai-preview:hover .dc-ai-preview__image {
+  transform: scale(1.055);
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.dc-ai-preview__image-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 58%, rgba(6, 11, 26, 0.68)),
+    linear-gradient(90deg, rgba(46, 230, 214, 0.04), transparent 45%, rgba(157, 78, 221, 0.07));
+}
+
+.dc-ai-preview__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 64px;
+  padding: 12px 15px;
+  border-top: 1px solid rgba(70, 88, 145, 0.36);
+  background: rgba(11, 17, 36, 0.95);
+}
+
+.dc-ai-preview__footer div {
+  display: grid;
+  gap: 4px;
+}
+
+.dc-ai-preview__footer div > span {
+  color: var(--dc-text-strong);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.dc-ai-preview__footer small {
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.56rem;
+}
+
+.dc-ai-preview__badge {
+  padding: 6px 9px;
+  border: 1px solid rgba(95, 255, 160, 0.26);
+  border-radius: 999px;
+  color: var(--dc-green);
+  background: rgba(95, 255, 160, 0.08);
+  font-family: var(--dc-mono);
+  font-size: 0.56rem;
+}
+
+.dc-ai-floating-status {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 150px;
+  padding: 11px 13px;
+  border: 1px solid rgba(83, 105, 190, 0.48);
+  border-radius: 13px;
+  color: var(--dc-cyan);
+  background: rgba(10, 16, 35, 0.9);
+  box-shadow: 0 18px 42px -25px rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(14px);
+}
+
+.dc-ai-floating-status div {
+  display: grid;
+  gap: 3px;
+}
+
+.dc-ai-floating-status strong {
+  color: var(--dc-text-strong);
+  font-size: 0.66rem;
+}
+
+.dc-ai-floating-status small {
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.53rem;
+}
+
+.dc-ai-floating-status--top {
+  top: 12%;
+  right: -6%;
+  animation: dc-ai-float 4.2s ease-in-out infinite;
+}
+
+.dc-ai-floating-status--bottom {
+  bottom: 14%;
+  left: -8%;
+  animation: dc-ai-float 4.8s ease-in-out infinite reverse;
+}
+/*
+ * Eu adiciono esse esmaecimento na base da seção pra dissolver o visual
+ * denso da IA (imagem, badges flutuantes, brilho radial) antes de entrar
+ * em Alunos — sem isso, a transição corta seco de "muito visual" pra
+ * "cards planos" de uma vez só.
+ */
+.dc-ai-section::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  height: 200px;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, var(--dc-bg) 85%);
+}

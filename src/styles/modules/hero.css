@@ -1,0 +1,242 @@
+/* =========================================================
+   HERO E TERMINAL
+   ---------------------------------------------------------
+   Eu concentro aqui a primeira dobra, a imagem de fundo, os CTAs e a simulação de terminal.
+========================================================= */
+
+/* =========================================================
+   5. HERO E TERMINAL
+========================================================= */
+
+.dc-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: calc(100svh - var(--dc-header-height));
+  padding: 80px 20px 72px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.dc-hero__background {
+  position: absolute;
+  inset: 0;
+  z-index: -4;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+  filter: saturate(1.06) contrast(1.06);
+  transform: scale(1.01);
+}
+
+.dc-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background:
+    linear-gradient(180deg, rgba(3, 7, 18, 0.58) 0%, rgba(6, 10, 25, 0.74) 58%, var(--dc-bg) 100%),
+    linear-gradient(90deg, rgba(5, 10, 24, 0.42), rgba(5, 10, 24, 0.14), rgba(5, 10, 24, 0.42));
+}
+
+.dc-hero__glow {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(55% 45% at 50% 20%, rgba(58, 113, 255, 0.18), transparent 70%),
+    radial-gradient(35% 35% at 82% 30%, rgba(46, 230, 214, 0.11), transparent 70%),
+    radial-gradient(35% 35% at 12% 36%, rgba(255, 46, 136, 0.1), transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.dc-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 930px;
+  margin-bottom: 38px;
+  text-align: center;
+}
+
+.dc-hero__title {
+  margin: 0;
+  color: var(--dc-text-strong);
+  font-family: var(--dc-mono);
+  font-size: clamp(2.4rem, 6vw, 4.9rem);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+  text-shadow: 0 8px 36px rgba(0, 0, 0, 0.78);
+  text-wrap: balance;
+}
+
+.dc-hero__title span {
+  color: transparent;
+  background: linear-gradient(90deg, var(--dc-pink), var(--dc-purple) 48%, var(--dc-cyan));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.dc-hero__description {
+  max-width: 680px;
+  margin: 24px auto 0;
+  color: #dbe3ff;
+  font-size: clamp(0.94rem, 1.5vw, 1.06rem);
+  line-height: 1.72;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.95);
+}
+
+.dc-hero__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.dc-primary-button,
+.dc-secondary-button,
+.dc-submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  border-radius: 11px;
+  font-family: var(--dc-mono);
+  font-size: 0.77rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.22s ease,
+    filter 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.dc-primary-button,
+.dc-submit-button {
+  padding: 14px 23px;
+  color: var(--dc-bg-deep);
+  background: linear-gradient(90deg, var(--dc-cyan), var(--dc-green));
+  box-shadow: 0 12px 36px -15px rgba(46, 230, 214, 0.72);
+}
+
+.dc-secondary-button {
+  padding: 13px 22px;
+  border: 1px solid rgba(200, 211, 245, 0.22);
+  color: var(--dc-text-strong);
+  background: rgba(9, 16, 37, 0.58);
+  backdrop-filter: blur(12px);
+}
+
+.dc-primary-button:hover,
+.dc-secondary-button:hover,
+.dc-submit-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.dc-secondary-button:hover {
+  border-color: rgba(46, 230, 214, 0.45);
+}
+
+.dc-terminal {
+  position: relative;
+  z-index: 1;
+  width: min(650px, 100%);
+  overflow: hidden;
+  border: 1px solid rgba(74, 129, 255, 0.44);
+  border-radius: 13px;
+  background: rgba(8, 15, 35, 0.8);
+  box-shadow:
+    0 28px 85px -24px rgba(0, 102, 255, 0.72),
+    0 0 0 1px rgba(46, 230, 214, 0.08) inset;
+  backdrop-filter: blur(15px) saturate(1.2);
+}
+
+.dc-terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(74, 99, 166, 0.34);
+  background: rgba(10, 17, 39, 0.9);
+}
+
+.dc-terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dc-terminal__dot--red {
+  background: #ff5f56;
+}
+
+.dc-terminal__dot--yellow {
+  background: #ffbd2e;
+}
+
+.dc-terminal__dot--green {
+  background: #27c93f;
+}
+
+.dc-terminal__name {
+  margin-left: 10px;
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.68rem;
+}
+
+.dc-terminal__body {
+  min-height: 188px;
+  padding: 22px;
+  background: rgba(8, 14, 32, 0.72);
+}
+
+.dc-terminal__line {
+  margin-bottom: 8px;
+  font-family: var(--dc-mono);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.dc-terminal__prompt {
+  color: var(--dc-cyan);
+}
+
+.dc-terminal__loader {
+  margin: 12px 0 15px;
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.68rem;
+}
+
+.dc-progress {
+  width: 100%;
+  height: 6px;
+  margin-bottom: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--dc-border);
+}
+
+.dc-progress__value {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--dc-pink), var(--dc-cyan), var(--dc-green));
+  transition: width 0.1s linear;
+}
+
+.dc-caret {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--dc-cyan);
+  animation: dc-blink 1s step-end infinite;
+}

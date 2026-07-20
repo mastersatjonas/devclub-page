@@ -1,0 +1,31 @@
+/* =========================================================
+   FORMAÇÕES E PROJETOS
+   ---------------------------------------------------------
+   Eu deixo neste arquivo os ajustes específicos das formações e dos projetos, enquanto os padrões de card permanecem compartilhados.
+========================================================= */
+
+/* =========================================================
+   8. FORMAÇÕES E PROJETOS
+========================================================= */
+
+#formacoes {
+  background:
+    radial-gradient(circle at 10% 25%, rgba(255, 46, 136, 0.055), transparent 24%),
+    radial-gradient(circle at 88% 70%, rgba(46, 230, 214, 0.05), transparent 28%);
+}
+
+.dc-card {
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+}
+
+.dc-project-grid {
+  margin-top: 28px;
+}
+
+.dc-project-card {
+  display: flex;
+  min-height: 215px;
+  flex-direction: column;
+}

@@ -1,0 +1,112 @@
+/* =========================================================
+   COMPONENTES COMPARTILHADOS
+   ---------------------------------------------------------
+   Eu reutilizo estas regras em cards, grids, tags e botões para evitar duplicação entre seções.
+========================================================= */
+
+/* =========================================================
+   6. COMPONENTES COMPARTILHADOS
+========================================================= */
+
+.dc-card-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.dc-card-grid--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.dc-card-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dc-card,
+.dc-project-card,
+.dc-tech-card,
+.dc-student-card,
+.dc-tutor-card,
+.dc-form,
+.dc-diff-card {
+  border: 1px solid var(--dc-border);
+  background: linear-gradient(145deg, rgba(22, 28, 51, 0.88), rgba(14, 19, 38, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.dc-card,
+.dc-project-card,
+.dc-tutor-card {
+  padding: 22px 20px;
+  border-radius: 14px;
+}
+
+.dc-card,
+.dc-project-card,
+.dc-tutor-card,
+.dc-student-card {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.dc-card:hover,
+.dc-project-card:hover,
+.dc-tutor-card:hover,
+.dc-student-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--accent, var(--dc-cyan)) 52%, var(--dc-border));
+  box-shadow: 0 20px 44px -28px var(--accent, var(--dc-cyan));
+}
+
+.dc-card__file {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-family: var(--dc-mono);
+  font-size: 0.69rem;
+}
+
+.dc-card h3,
+.dc-project-card h4,
+.dc-tech-card h3,
+.dc-tutor-card h3 {
+  margin: 0 0 10px;
+  color: var(--dc-text-strong);
+}
+
+.dc-card h3 {
+  font-size: 1.08rem;
+}
+
+.dc-project-card h4 {
+  font-size: 1rem;
+}
+
+.dc-card p,
+.dc-project-card p,
+.dc-tech-card p,
+.dc-tutor-card p {
+  margin: 0 0 17px;
+  color: var(--dc-text-dim);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.dc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.dc-tags span {
+  padding: 4px 8px;
+  border: 1px solid var(--dc-border);
+  border-radius: 6px;
+  color: var(--dc-text);
+  background: rgba(22, 28, 51, 0.72);
+  font-family: var(--dc-mono);
+  font-size: 0.64rem;
+}

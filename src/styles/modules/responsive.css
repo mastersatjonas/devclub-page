@@ -1,0 +1,724 @@
+/* =========================================================
+   RESPONSIVIDADE
+   ---------------------------------------------------------
+   Eu organizo os breakpoints do maior para o menor e valido o layout até 360 px, sem depender de zoom ou rolagem horizontal.
+========================================================= */
+
+/* =========================================================
+   14. RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1220px) {
+  .dc-site-header__inner {
+    grid-template-columns: 158px minmax(0, 1fr) auto;
+    gap: 16px;
+  }
+
+  .dc-site-brand {
+    width: 154px;
+    height: 52px;
+  }
+
+  .dc-site-nav {
+    gap: 8px;
+  }
+
+  .dc-site-header__cta--desktop {
+    padding-right: 13px;
+    font-size: 0.68rem;
+  }
+
+  .dc-card-grid--four,
+  .dc-tech-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dc-method-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dc-ai-section__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(350px, 0.85fr);
+    gap: 44px;
+  }
+
+  .dc-ai-floating-status--top {
+    right: 0;
+  }
+
+  .dc-ai-floating-status--bottom {
+    left: 0;
+  }
+}
+
+/*
+ * Eu ativo o menu compacto antes que os links comecem a comprimir.
+ * Isso preserva legibilidade e evita quebra de linha no header.
+ */
+@media (max-width: 1080px) {
+  .dc-site-header,
+  .dc-site-header__inner {
+    height: var(--dc-header-height-mobile);
+  }
+
+  .dc-site-header__inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .dc-site-brand {
+    width: 150px;
+    height: 50px;
+  }
+
+  .dc-site-menu-button {
+    display: grid;
+  }
+
+  .dc-site-header__cta--desktop {
+    display: none;
+  }
+
+  .dc-site-nav {
+    position: fixed;
+    top: var(--dc-header-height-mobile);
+    right: 14px;
+    left: 14px;
+    display: flex;
+    max-height: calc(100dvh - var(--dc-header-height-mobile) - 20px);
+    padding: 14px;
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 0 0 15px 15px;
+    background: rgba(7, 13, 29, 0.98);
+    box-shadow: 0 24px 55px rgba(0, 0, 0, 0.44);
+    backdrop-filter: blur(22px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    pointer-events: none;
+    transition:
+      opacity 0.22s ease,
+      visibility 0.22s ease,
+      transform 0.22s ease;
+  }
+
+  .dc-site-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /*
+   * header.css define white-space: nowrap pensando no menu horizontal
+   * de desktop. Aqui o menu vira uma coluna estreita (dropdown mobile),
+   * e sem desfazer o nowrap, labels como "IA no DevClub" tentam caber
+   * numa linha só e estouram a borda direita — era isso que estava
+   * cortando o menu na lateral.
+   */
+  .dc-site-nav > a:not(.dc-site-header__cta) {
+    padding: 13px 12px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .dc-site-nav > a:not(.dc-site-header__cta)::after {
+    right: auto;
+    bottom: 7px;
+    left: 12px;
+    width: 40px;
+  }
+
+  .dc-site-nav > a:not(.dc-site-header__cta):hover,
+  .dc-site-nav > a:not(.dc-site-header__cta).is-active {
+    background: rgba(95, 255, 160, 0.07);
+  }
+
+  .dc-site-header__cta--mobile {
+    display: inline-flex;
+    margin-top: 9px;
+  }
+
+  .dc-main {
+    padding-top: var(--dc-header-height-mobile);
+  }
+
+  .dc-section,
+  .dc-cta-section,
+  .dc-hero {
+    scroll-margin-top: calc(var(--dc-header-height-mobile) + 18px);
+  }
+
+  .dc-hero {
+    min-height: calc(100svh - var(--dc-header-height-mobile));
+  }
+
+  .dc-ai-section__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dc-ai-section__visual {
+    order: -1;
+  }
+
+  .dc-ai-preview {
+    width: min(100%, 500px);
+    transform: none;
+  }
+
+  .dc-cta-content {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .dc-form {
+    width: 100%;
+    max-width: 580px;
+  }
+}
+
+@media (max-width: 820px) {
+  .dc-section {
+    padding-block: 88px;
+  }
+
+  .dc-card-grid--four,
+  .dc-card-grid--three,
+  .dc-tech-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dc-card {
+    min-height: 300px;
+  }
+
+  .dc-project-card {
+    min-height: 205px;
+  }
+
+  .dc-side-nav {
+    display: none;
+  }
+
+  .dc-ai-resources {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dc-ai-resource-card {
+    min-height: 150px;
+  }
+
+  /*
+   * As faixas de transição entre seções (adicionadas na revisão de
+   * scroll) foram dimensionadas pensando em desktop. Numa seção com
+   * padding-block menor, uma faixa de 200-240px de altura fica
+   * desproporcional ao conteúdo — por isso eu reduzo aqui e reduzo
+   * de novo no breakpoint de 620px.
+   */
+  .dc-ai-section::after {
+    height: 140px;
+  }
+
+  #tecnologias::before {
+    height: 170px;
+  }
+}
+
+@media (max-width: 620px) {
+  /*
+   * Jonas reportou o header "muito grande" testando em mobile. 72px
+   * (herdado do breakpoint de 1080px) é mais alto que o padrão comum de
+   * header mobile — reduzo aqui e mais uma vez em 360px. Ajustei a marca
+   * junto pra não sobrar espaço vazio ao redor dela.
+   */
+  :root {
+    --dc-header-height-mobile: 64px;
+  }
+
+  .dc-container {
+    width: min(100% - 30px, var(--dc-container));
+  }
+
+  .dc-section-title {
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
+  }
+
+  .dc-site-header__inner {
+    width: calc(100% - 24px);
+  }
+
+  .dc-site-brand {
+    width: 132px;
+    height: 46px;
+  }
+
+  .dc-hero {
+    padding: 70px 15px 64px;
+  }
+
+  .dc-hero__background {
+    object-position: 53% center;
+  }
+
+  .dc-hero__title {
+    font-size: clamp(2rem, 11vw, 3.15rem);
+  }
+
+  .dc-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dc-primary-button,
+  .dc-secondary-button {
+    width: 100%;
+  }
+
+  .dc-terminal__body {
+    min-height: 176px;
+    padding: 18px 15px;
+  }
+
+  .dc-terminal__line {
+    font-size: 0.76rem;
+    overflow-wrap: anywhere;
+  }
+
+  .dc-diff-card {
+    padding: 22px 16px;
+  }
+
+  .dc-diff-line span {
+    font-size: 0.78rem;
+  }
+
+  .dc-card-grid--four,
+  .dc-card-grid--three,
+  .dc-tech-grid,
+  .dc-method-grid,
+  .dc-ai-resources {
+    grid-template-columns: 1fr;
+  }
+
+  .dc-card,
+  .dc-project-card,
+  .dc-tech-card,
+  .dc-method-card,
+  .dc-ai-resource-card,
+  .dc-tutor-card {
+    min-height: auto;
+  }
+
+  .dc-ai-preview {
+    border-radius: 18px;
+  }
+
+  .dc-ai-floating-status {
+    display: none;
+  }
+
+  .dc-ai-preview__footer {
+    align-items: flex-start;
+  }
+
+  .dc-student-scroll {
+    margin-left: 15px;
+  }
+
+  .dc-student-card {
+    min-width: min(310px, calc(100vw - 44px));
+  }
+
+  .dc-cta-section {
+    padding: 92px 15px 84px;
+  }
+
+  .dc-benefits {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dc-footer {
+    align-items: flex-start;
+    font-size: 0.61rem;
+  }
+
+  /* Segunda redução das faixas de transição — nesta largura o padding
+     das seções já encolheu mais uma vez, então a faixa acompanha. */
+  .dc-ai-section::after {
+    height: 100px;
+  }
+
+  #tecnologias::before {
+    height: 130px;
+  }
+}
+
+@media (max-width: 420px) {
+  .dc-site-brand {
+    width: 118px;
+    height: 43px;
+  }
+
+  .dc-site-menu-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .dc-eyebrow,
+  .dc-eyebrow-pill {
+    letter-spacing: 0.08em;
+  }
+
+  .dc-terminal__name {
+    font-size: 0.58rem;
+  }
+
+  .dc-ai-preview__status {
+    display: none;
+  }
+
+  .dc-form {
+    padding: 21px 17px;
+  }
+}
+
+
+/*
+ * Em telas pequenas eu reduzo densidade visual sem esconder conteúdo.
+ * O objetivo é manter a experiência completa em celulares de 360 px,
+ * preservando alvos de toque, contraste e hierarquia tipográfica.
+ */
+@media (max-width: 360px) {
+  :root {
+    --dc-header-height-mobile: 58px;
+  }
+
+  html {
+    scroll-padding-top: calc(var(--dc-header-height-mobile) + 12px);
+  }
+
+  .dc-container {
+    width: calc(100% - 24px);
+  }
+
+  .dc-section {
+    padding-block: 76px;
+  }
+
+  .dc-section-title {
+    margin-bottom: 26px;
+    font-size: clamp(1.48rem, 8.4vw, 1.9rem);
+    line-height: 1.22;
+    overflow-wrap: anywhere;
+  }
+
+  /*
+   * O título de Empresas usa .dc-code-title por cima de .dc-section-title
+   * (spans + a string 'mercado-de-trabalho' entre aspas). Isso nunca tinha
+   * sido testado isolado contra tela pequena — sem essa regra, a string
+   * longa pode estourar a largura do container em vez de quebrar linha.
+   */
+  .dc-code-title {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .dc-subsection-title {
+    font-size: 1.3rem;
+  }
+
+  .dc-section-text,
+  .dc-disclaimer {
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  .dc-subsection {
+    margin-top: 68px;
+  }
+
+  .dc-site-header,
+  .dc-site-header__inner {
+    height: var(--dc-header-height-mobile);
+  }
+
+  .dc-site-header__inner {
+    width: calc(100% - 20px);
+  }
+
+  .dc-site-brand {
+    width: 96px;
+    height: 36px;
+  }
+
+  .dc-site-menu-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+  }
+
+  .dc-site-nav {
+    top: var(--dc-header-height-mobile);
+    right: 10px;
+    left: 10px;
+    max-height: calc(100dvh - var(--dc-header-height-mobile) - 12px);
+    padding: 11px;
+  }
+
+  .dc-site-nav > a:not(.dc-site-header__cta) {
+    padding: 12px 10px;
+    font-size: 0.75rem;
+  }
+
+  .dc-site-header__cta--mobile {
+    min-height: 44px;
+    padding: 8px 13px 8px 8px;
+    font-size: 0.72rem;
+  }
+
+  .dc-main {
+    padding-top: var(--dc-header-height-mobile);
+  }
+
+  .dc-hero {
+    min-height: calc(100svh - var(--dc-header-height-mobile));
+    padding: 56px 12px 54px;
+  }
+
+  .dc-hero__background {
+    object-position: 55% center;
+  }
+
+  .dc-hero__content {
+    margin-bottom: 28px;
+  }
+
+  .dc-hero__title {
+    font-size: clamp(1.85rem, 10.6vw, 2.5rem);
+    line-height: 1.08;
+  }
+
+  .dc-hero__description {
+    margin-top: 17px;
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+
+  .dc-hero__actions {
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .dc-primary-button,
+  .dc-secondary-button,
+  .dc-submit-button {
+    min-height: 46px;
+    padding: 13px 15px;
+    font-size: 0.76rem;
+  }
+
+  .dc-terminal {
+    border-radius: 10px;
+  }
+
+  .dc-terminal__bar {
+    padding: 10px 11px;
+  }
+
+  .dc-terminal__name {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dc-terminal__body {
+    min-height: 164px;
+    padding: 16px 12px;
+  }
+
+  .dc-terminal__line {
+    margin-bottom: 7px;
+    font-size: 0.69rem;
+    line-height: 1.5;
+  }
+
+  .dc-terminal__loader {
+    font-size: 0.64rem;
+  }
+
+  .dc-diff-card,
+  .dc-card,
+  .dc-project-card,
+  .dc-tech-card,
+  .dc-method-card,
+  .dc-ai-resource-card,
+  .dc-tutor-card,
+  .dc-form {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .dc-diff-line {
+    gap: 8px;
+    padding-left: 10px;
+  }
+
+  .dc-diff-line__sign {
+    width: 10px;
+    flex-basis: 10px;
+  }
+
+  .dc-diff-line span {
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
+
+  .dc-card__file,
+  .dc-tags span,
+  .dc-tech-card__status {
+    font-size: 0.62rem;
+  }
+
+  .dc-tech-card__icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 17px;
+  }
+
+  .dc-tech-card__icon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .dc-ai-section__layout {
+    gap: 34px;
+  }
+
+  .dc-ai-preview__header {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .dc-ai-preview__status {
+    display: none;
+  }
+
+  .dc-ai-preview__header small {
+    text-align: right;
+  }
+
+  .dc-ai-preview__footer {
+    min-height: 58px;
+    padding: 10px 12px;
+  }
+
+  .dc-ai-preview__footer small {
+    display: none;
+  }
+
+  .dc-ai-preview__badge {
+    padding: 5px 8px;
+  }
+
+  .dc-student-scroll {
+    margin-left: 12px;
+    padding-right: 12px;
+  }
+
+  .dc-student-card {
+    min-width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+    padding: 18px 16px;
+  }
+
+  /*
+   * dc-commit-translation ainda está pendente de decisão (mantenho o
+   * parágrafo de tradução em linguagem simples no card de aluno, ou
+   * removo?). Deixo coberto aqui de qualquer forma — se o parágrafo for
+   * removido do componente, esta linha simplesmente não tem efeito.
+   */
+  .dc-commit-message,
+  .dc-commit-translation,
+  .dc-student-card__quote {
+    font-size: 0.76rem;
+  }
+
+  .dc-marquee span {
+    padding-inline: 20px;
+    font-size: 0.9rem;
+  }
+
+  .dc-cta-section {
+    padding: 80px 12px 72px;
+  }
+
+  .dc-cta-copy h2 {
+    font-size: clamp(1.55rem, 8.5vw, 2rem);
+    overflow-wrap: anywhere;
+  }
+
+  .dc-form {
+    padding-block: 20px;
+  }
+
+  .dc-form input,
+  .dc-form select {
+    min-height: 44px;
+    padding: 11px 12px;
+  }
+
+  .dc-footer {
+    justify-content: center;
+    padding: 28px 12px 34px;
+    font-size: 0.58rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+}
+
+/*
+ * Em dispositivos sem hover eu retiro deslocamentos que poderiam parecer
+ * estados presos após o toque, mas preservo feedback de cor e foco.
+ */
+@media (hover: none) {
+  .dc-card:hover,
+  .dc-project-card:hover,
+  .dc-tech-card:hover,
+  .dc-ai-resource-card:hover,
+  .dc-ai-preview:hover,
+  .dc-site-header__cta:hover,
+  .dc-primary-button:hover,
+  .dc-secondary-button:hover,
+  .dc-submit-button:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .dc-reveal,
+  .dc-diff-line,
+  .dc-page__content {
+    opacity: 1;
+    transform: none;
+  }
+
+  .dc-marquee {
+    animation: none;
+  }
+}

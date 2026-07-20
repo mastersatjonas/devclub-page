@@ -1,0 +1,44 @@
+/* =========================================================
+   DEVCLUB — PONTO DE ENTRADA DOS ESTILOS
+   ---------------------------------------------------------
+   Eu importo os módulos em ordem de dependência. Tokens e
+   utilitários entram primeiro; responsividade entra por último
+   para aplicar ajustes sem aumentar especificidade.
+========================================================= */
+
+@import "./modules/tokens.css";
+@import "./modules/utilities.css";
+@import "./modules/header.css";
+@import "./modules/intro.css";
+@import "./modules/hero.css";
+@import "./modules/shared-components.css";
+@import "./modules/about.css";
+@import "./modules/formations.css";
+@import "./modules/technologies.css";
+@import "./modules/ai.css";
+@import "./modules/social-proof.css";
+@import "./modules/cta.css";
+@import "./modules/animations.css";
+@import "./modules/responsive.css";
+/* =========================================================
+   DEVCLUB — PONTO DE ENTRADA DOS ESTILOS
+   ---------------------------------------------------------
+   Eu importo os módulos em ordem de dependência. Tokens e
+   utilitários entram primeiro; responsividade entra por último
+   para aplicar ajustes sem aumentar especificidade.
+========================================================= */
+
+@import "./modules/tokens.css";
+@import "./modules/utilities.css";
+@import "./modules/header.css";
+@import "./modules/intro.css";
+@import "./modules/hero.css";
+@import "./modules/shared-components.css";
+@import "./modules/about.css";
+@import "./modules/formations.css";
+@import "./modules/technologies.css";
+@import "./modules/ai.css";
+@import "./modules/social-proof.css";
+@import "./modules/cta.css";
+@import "./modules/animations.css";
+@import "./modules/responsive.css";

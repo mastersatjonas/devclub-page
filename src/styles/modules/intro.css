@@ -1,0 +1,83 @@
+/* =========================================================
+   INTRO DE CARREGAMENTO
+   ---------------------------------------------------------
+   Eu separo a intro do restante da interface para controlar animações e bloqueio de rolagem sem contaminar os estilos da página.
+========================================================= */
+
+/* =========================================================
+   4. INTRO
+========================================================= */
+
+.dc-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  color: var(--dc-text);
+  background: var(--dc-bg-deep);
+}
+
+.dc-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(157, 78, 221, 0.2), transparent 30%),
+    linear-gradient(rgba(46, 230, 214, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46, 230, 214, 0.035) 1px, transparent 1px);
+  background-size: auto, 42px 42px, 42px 42px;
+}
+
+.dc-intro__content {
+  position: relative;
+  z-index: 1;
+  width: min(420px, calc(100% - 40px));
+  text-align: center;
+}
+
+.dc-intro__brand {
+  display: block;
+  color: var(--dc-text-strong);
+  font-family: var(--dc-mono);
+  font-size: clamp(2.5rem, 10vw, 5.8rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-shadow:
+    2px 0 rgba(255, 46, 136, 0.48),
+    -2px 0 rgba(46, 230, 214, 0.48);
+}
+
+.dc-intro__message {
+  display: block;
+  min-height: 18px;
+  margin: 18px 0 22px;
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.7rem;
+}
+
+.dc-intro__content small {
+  color: var(--dc-text-dim);
+  font-family: var(--dc-mono);
+  font-size: 0.66rem;
+}
+
+.dc-intro > button {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2;
+  padding: 8px 14px;
+  border: 1px solid var(--dc-border);
+  border-radius: 7px;
+  color: var(--dc-text-dim);
+  background: transparent;
+  font-family: var(--dc-mono);
+  font-size: 0.68rem;
+  cursor: pointer;
+}
+
+.dc-intro.is-exiting {
+  animation: dc-intro-out 0.65s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
