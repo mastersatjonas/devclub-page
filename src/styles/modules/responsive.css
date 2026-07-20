@@ -721,4 +721,8 @@
   .dc-marquee {
     animation: none;
   }
+
+  .dc-about-qr {
+    animation: none;
+  }
 }

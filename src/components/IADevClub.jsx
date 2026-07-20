@@ -7,6 +7,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import useReveal from "../hooks/useReveal";
+import useReducedMotion from "../hooks/useReducedMotion";
 import { RECURSOS_IA } from "../data/devclubData";
 import iaDevClubImage from "../assets/ia-devclub.webp";
 
@@ -20,6 +21,86 @@ const ICONS = {
   bot: Bot,
   rocket: Rocket,
 };
+
+/**
+ * Trilhas de circuito impresso, desenhadas como caminhos SVG com curvas de
+ * 90 graus (o jeito clássico de trilha de PCB) em vez de linhas retas ou
+ * diagonais soltas — é o que faz o olho reconhecer "placa de circuito" em
+ * vez de "linhas aleatórias".
+ *
+ * Uso useReducedMotion pra decidir se os pulsos (os pontos de luz que
+ * percorrem as trilhas) entram ou não. Eles usam <animateMotion>, que é
+ * animação SMIL, não CSS — a media query prefers-reduced-motion do CSS
+ * não alcança SMIL, então a forma correta de respeitar a preferência é
+ * simplesmente não renderizar esses elementos.
+ */
+const CIRCUIT_PATHS = [
+  "M0,120 H260 L320,180 H620",
+  "M0,340 H180 L240,280 H520 L580,340 H900",
+  "M1600,90 H1240 L1180,150 H860",
+  "M1600,300 H1360 L1300,240 H980 L920,300 H700",
+  "M1600,520 H1300 L1240,580 H900",
+  "M0,560 H220 L280,620 H560 L620,680 H820",
+  "M0,780 H340 L400,720 H700",
+  "M1600,720 H1280 L1220,780 H960",
+];
+
+const CIRCUIT_NODES = [
+  [260, 120],
+  [620, 180],
+  [520, 280],
+  [900, 340],
+  [1180, 150],
+  [980, 240],
+  [700, 300],
+  [900, 580],
+  [820, 680],
+  [700, 720],
+  [960, 780],
+];
+
+const CIRCUIT_PULSES = [
+  { path: CIRCUIT_PATHS[1], duration: "6s" },
+  { path: CIRCUIT_PATHS[3], duration: "7.5s" },
+  { path: CIRCUIT_PATHS[6], duration: "9s" },
+];
+
+function CircuitBackground({ reducedMotion }) {
+  return (
+    <svg
+      className="dc-ai-circuit"
+      viewBox="0 0 1600 900"
+      preserveAspectRatio="xMidYMid slice"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="dc-circuit-stroke" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#2ee6d6" />
+          <stop offset="100%" stopColor="#9d4edd" />
+        </linearGradient>
+      </defs>
+
+      <g className="dc-circuit-traces">
+        {CIRCUIT_PATHS.map((d) => (
+          <path key={d} d={d} />
+        ))}
+      </g>
+
+      <g className="dc-circuit-nodes">
+        {CIRCUIT_NODES.map(([cx, cy]) => (
+          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="4" />
+        ))}
+      </g>
+
+      {!reducedMotion &&
+        CIRCUIT_PULSES.map((pulse, index) => (
+          <circle key={index} r="3.2" className="dc-circuit-pulse">
+            <animateMotion dur={pulse.duration} repeatCount="indefinite" path={pulse.path} />
+          </circle>
+        ))}
+    </svg>
+  );
+}
 
 function AIResourceCard({ resource, index, visible }) {
   const Icon = ICONS[resource.icon] ?? Sparkles;
@@ -50,6 +131,7 @@ function AIResourceCard({ resource, index, visible }) {
  */
 export default function IADevClub() {
   const [sectionRef, visible] = useReveal({ threshold: 0.1 });
+  const reducedMotion = useReducedMotion();
 
   return (
     <section
@@ -59,6 +141,7 @@ export default function IADevClub() {
       aria-labelledby="ia-devclub-title"
     >
       <div className="dc-ai-section__background" aria-hidden="true" />
+      <CircuitBackground reducedMotion={reducedMotion} />
 
       <div className="dc-container dc-ai-section__container">
         <div className="dc-ai-section__layout">
