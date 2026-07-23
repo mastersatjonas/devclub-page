@@ -18,12 +18,7 @@ const INITIAL_FORM = {
  * frases em sequência, criando uma pequena narrativa de evolução profissional.
  */
 const MILESTONES = [
-  "primeiro commit",
-  "primeiro PR aceito",
-  "primeira entrevista",
-  "primeira vaga",
-  "promovido a pleno",
-  "tech lead",
+ 
 ];
 
 const CONSTELLATION_COLORS = ["#2ee6d6", "#ff2e88", "#9d4edd", "#ffd166", "#5fffa0"];
