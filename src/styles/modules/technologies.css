@@ -1,41 +1,213 @@
 /* =========================================================
    TECNOLOGIAS
    ---------------------------------------------------------
-   Eu controlo aqui os ícones oficiais, a cor individual de cada stack e o comportamento visual dos cards de tecnologia.
+   Controla:
+   - estrutura da seção;
+   - constelação animada com ícones das tecnologias;
+   - linhas luminosas entre os ícones;
+   - cards de tecnologia;
+   - responsividade;
+   - preferência por redução de movimento.
 ========================================================= */
 
 /* =========================================================
-   9. TECNOLOGIAS
+   1. ESTRUTURA DA SEÇÃO
 ========================================================= */
-/*
- * Eu adiciono este brilho de entrada porque a seção anterior (Formações)
- * termina em cards dc-card e esta começa direto numa grade de ícones —
- * sem nenhum elemento visual fazendo a ponte entre as duas, a transição
- * parece um corte seco em vez de uma continuação.
- */
-#tecnologias {
+
+#tecnologias,
+.dc-technologies-section {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
 }
 
+/*
+ * Faz a transição visual entre Formações e Tecnologias.
+ */
 #tecnologias::before {
   content: "";
   position: absolute;
   top: -1px;
   left: 0;
   z-index: 0;
+
   width: 100%;
   height: 240px;
+
   pointer-events: none;
-  background: radial-gradient(60% 100% at 50% 0%, rgba(255, 209, 102, 0.055), transparent 72%);
+
+  background:
+    radial-gradient(
+      60% 100% at 50% 0%,
+      rgba(255, 209, 102, 0.07),
+      transparent 72%
+    );
 }
 
-.dc-container {
-  position: relative;
-  z-index: 1;
+/*
+ * Brilhos ambientais da seção.
+ */
+#tecnologias::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 14% 32%,
+      rgba(46, 230, 214, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 86% 68%,
+      rgba(157, 78, 221, 0.09),
+      transparent 30%
+    );
 }
+
+/*
+ * Mantém todo o conteúdo da seção acima da animação.
+ * O seletor é propositalmente limitado à seção para não
+ * alterar containers de outras partes da página.
+ */
+#tecnologias > .dc-container,
+.dc-technologies-section > .dc-container {
+  position: relative;
+  z-index: 3;
+}
+
 .dc-technologies-description {
   margin: -14px 0 38px;
 }
+
+/* =========================================================
+   2. CONSTELAÇÃO DE ÍCONES
+========================================================= */
+
+/*
+ * Camada absoluta que ocupa toda a seção.
+ */
+.dc-tech-constellation {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  overflow: hidden;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+/*
+ * Proteção visual nas bordas para a animação se misturar
+ * suavemente com as seções anterior e seguinte.
+ */
+.dc-tech-constellation::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 13, 26, 0.28) 0%,
+      transparent 16%,
+      transparent 82%,
+      rgba(8, 13, 26, 0.34) 100%
+    ),
+    radial-gradient(
+      circle at 50% 48%,
+      transparent 0%,
+      rgba(8, 13, 26, 0.04) 58%,
+      rgba(8, 13, 26, 0.24) 100%
+    );
+}
+
+/*
+ * Canvas das conexões e camada dos ícones ocupam a mesma área.
+ */
+.dc-tech-constellation__connections,
+.dc-tech-constellation__icons {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.dc-tech-constellation__connections {
+  z-index: 0;
+
+  display: block;
+
+  opacity: 0.94;
+}
+
+.dc-tech-constellation__icons {
+  z-index: 1;
+}
+
+/*
+ * Cada ponto da constelação é um ícone real da tecnologia.
+ */
+.dc-tech-constellation__icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  transform-origin: center;
+  will-change: transform;
+
+  filter:
+    drop-shadow(0 0 6px currentColor)
+    drop-shadow(0 0 15px currentColor);
+}
+
+/*
+ * Halo luminoso atrás dos ícones.
+ */
+.dc-tech-constellation__icon::before {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  z-index: -1;
+
+  border-radius: inherit;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      color-mix(in srgb, currentColor 25%, transparent),
+      transparent 70%
+    );
+
+  filter: blur(8px);
+  opacity: 0.76;
+}
+
+.dc-tech-constellation__icon svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================================================
+   3. GRADE DE TECNOLOGIAS
+========================================================= */
 
 .dc-tech-grid {
   display: grid;
@@ -43,17 +215,51 @@
   gap: 17px;
 }
 
+/* =========================================================
+   4. CARDS
+========================================================= */
+
 .dc-tech-card {
   position: relative;
+
   display: flex;
   min-height: 285px;
   padding: 24px 21px;
   flex-direction: column;
+
   overflow: hidden;
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--tech-color) 12%,
+      var(--dc-border)
+    );
   border-radius: 16px;
+
   background:
-    linear-gradient(145deg, color-mix(in srgb, var(--tech-color) 6%, transparent), transparent 44%),
-    linear-gradient(145deg, rgba(22, 28, 51, 0.9), rgba(12, 18, 38, 0.92));
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--tech-color) 7%,
+        transparent
+      ),
+      transparent 44%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(22, 28, 51, 0.91),
+      rgba(12, 18, 38, 0.93)
+    );
+
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 16px 38px -32px rgba(0, 0, 0, 0.9);
+
   transition:
     transform 0.25s ease,
     border-color 0.25s ease,
@@ -65,44 +271,118 @@
   position: absolute;
   top: -70px;
   right: -70px;
+
   width: 150px;
   height: 150px;
+
   border-radius: 50%;
+
   background: var(--tech-color);
+
   filter: blur(65px);
   opacity: 0.09;
+
   pointer-events: none;
+
   transition: opacity 0.25s ease;
+}
+
+/*
+ * Linha discreta que surge na base do card durante o hover.
+ */
+.dc-tech-card::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: 0;
+  left: 18px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--tech-color),
+      transparent
+    );
+
+  opacity: 0;
+  transform: scaleX(0.55);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .dc-tech-card:hover {
   transform: translateY(-6px);
-  border-color: color-mix(in srgb, var(--tech-color) 56%, var(--dc-border));
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--tech-color) 56%,
+      var(--dc-border)
+    );
+
   box-shadow:
     0 22px 48px -30px var(--tech-color),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
 
 .dc-tech-card:hover::before {
   opacity: 0.17;
 }
 
+.dc-tech-card:hover::after {
+  opacity: 0.72;
+  transform: scaleX(1);
+}
+
+/* =========================================================
+   5. ÍCONE DO CARD
+========================================================= */
+
 .dc-tech-card__icon {
   position: relative;
   z-index: 1;
+
   display: grid;
   width: 64px;
   height: 64px;
   margin-bottom: 20px;
+
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--tech-color) 45%, transparent);
+
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--tech-color) 45%,
+      transparent
+    );
   border-radius: 17px;
+
   color: var(--tech-color);
+
   background:
-    linear-gradient(145deg, color-mix(in srgb, var(--tech-color) 17%, transparent), color-mix(in srgb, var(--tech-color) 5%, transparent));
+    linear-gradient(
+      145deg,
+      color-mix(
+        in srgb,
+        var(--tech-color) 17%,
+        transparent
+      ),
+      color-mix(
+        in srgb,
+        var(--tech-color) 5%,
+        transparent
+      )
+    );
+
   box-shadow:
     0 12px 30px -18px var(--tech-color),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
@@ -110,36 +390,58 @@
 
 .dc-tech-card:hover .dc-tech-card__icon {
   transform: translateY(-3px) rotate(-3deg) scale(1.04);
-  box-shadow: 0 17px 36px -17px var(--tech-color);
+
+  box-shadow:
+    0 17px 36px -17px var(--tech-color);
 }
 
 .dc-tech-card__icon svg {
   display: block;
+
   width: 35px;
   height: 35px;
-  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--tech-color) 40%, transparent));
+
+  filter:
+    drop-shadow(
+      0 0 8px
+      color-mix(
+        in srgb,
+        var(--tech-color) 40%,
+        transparent
+      )
+    );
 }
+
+/* =========================================================
+   6. CONTEÚDO DOS CARDS
+========================================================= */
 
 .dc-tech-card h3 {
   position: relative;
   z-index: 1;
+
   font-size: 1.02rem;
 }
 
 .dc-tech-card p {
   position: relative;
   z-index: 1;
+
   margin-bottom: 20px;
 }
 
 .dc-tech-card__status {
   position: relative;
   z-index: 1;
+
   display: inline-flex;
   align-items: center;
   gap: 7px;
+
   margin-top: auto;
+
   color: var(--dc-text-dim);
+
   font-family: var(--dc-mono);
   font-size: 0.62rem;
 }
@@ -147,7 +449,144 @@
 .dc-tech-card__status > span {
   width: 7px;
   height: 7px;
+
   border-radius: 50%;
+
   background: var(--tech-color);
+
   box-shadow: 0 0 9px var(--tech-color);
+}
+
+/* =========================================================
+   7. RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1120px) {
+  .dc-tech-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dc-tech-constellation__connections {
+    opacity: 0.82;
+  }
+
+  .dc-tech-constellation__icon {
+    filter:
+      drop-shadow(0 0 5px currentColor)
+      drop-shadow(0 0 12px currentColor);
+  }
+}
+
+@media (max-width: 820px) {
+  .dc-technologies-description {
+    margin-top: -8px;
+  }
+
+  .dc-tech-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dc-tech-card {
+    min-height: 270px;
+  }
+}
+
+@media (max-width: 620px) {
+  #tecnologias::before {
+    height: 190px;
+  }
+
+  .dc-technologies-description {
+    margin-bottom: 30px;
+  }
+
+  .dc-tech-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .dc-tech-card {
+    min-height: 250px;
+    padding: 22px 20px;
+  }
+
+  .dc-tech-constellation__connections {
+    opacity: 0.62;
+  }
+
+  .dc-tech-constellation__icon {
+    /*
+     * O JavaScript controla a opacidade individual.
+     * O !important reduz o brilho geral no celular sem
+     * apagar totalmente a animação.
+     */
+    opacity: 0.39 !important;
+
+    filter:
+      drop-shadow(0 0 4px currentColor)
+      drop-shadow(0 0 9px currentColor);
+  }
+
+  .dc-tech-constellation__icon::before {
+    opacity: 0.55;
+  }
+
+  .dc-tech-constellation::after {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(8, 13, 26, 0.32),
+        rgba(8, 13, 26, 0.08) 34%,
+        rgba(8, 13, 26, 0.16) 72%,
+        rgba(8, 13, 26, 0.38)
+      );
+  }
+}
+
+@media (max-width: 390px) {
+  .dc-tech-card {
+    min-height: 235px;
+    padding: 20px 18px;
+  }
+
+  .dc-tech-card__icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 17px;
+  }
+
+  .dc-tech-card__icon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+  .dc-tech-constellation__connections {
+    opacity: 0.5;
+  }
+
+  .dc-tech-constellation__icon {
+    opacity: 0.34 !important;
+  }
+}
+
+/* =========================================================
+   8. ACESSIBILIDADE — REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .dc-tech-constellation__icon {
+    will-change: auto;
+  }
+
+  .dc-tech-card,
+  .dc-tech-card__icon,
+  .dc-tech-card::before,
+  .dc-tech-card::after {
+    transition: none;
+  }
+
+  .dc-tech-card:hover,
+  .dc-tech-card:hover .dc-tech-card__icon {
+    transform: none;
+  }
 }

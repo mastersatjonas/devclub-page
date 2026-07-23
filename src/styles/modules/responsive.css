@@ -722,7 +722,11 @@
     animation: none;
   }
 
-  .dc-about-qr {
+  .dc-tech-icon-drift {
+    animation: none;
+  }
+
+  .dc-formacoes-code {
     animation: none;
   }
 }

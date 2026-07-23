@@ -55,3 +55,24 @@
     transform: translateY(-9px);
   }
 }
+
+/*
+ * Deriva lenta e curta — usada pelos fundos decorativos de seção (hoje:
+ * ícones flutuantes em Tecnologias e trechos de código em Formações).
+ * Escrevo os 3 pontos do keyframe de forma explícita em vez de usar
+ * alternate, porque assim fica claro no código qual é o deslocamento
+ * máximo sem precisar calcular a partir de "metade do caminho".
+ */
+@keyframes dc-drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(18px, -14px) rotate(3deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}

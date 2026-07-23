@@ -9,9 +9,16 @@
 ========================================================= */
 
 #formacoes {
+  position: relative;
+  overflow: hidden;
   background:
     radial-gradient(circle at 10% 25%, rgba(255, 46, 136, 0.055), transparent 24%),
     radial-gradient(circle at 88% 70%, rgba(46, 230, 214, 0.05), transparent 28%);
+}
+
+#formacoes .dc-container {
+  position: relative;
+  z-index: 1;
 }
 
 .dc-card {
@@ -28,4 +35,47 @@
   display: flex;
   min-height: 215px;
   flex-direction: column;
+}
+
+/*
+ * Campo de código flutuando no fundo — cada trecho pertence de verdade a
+ * uma das quatro formações e usa a mesma cor do card correspondente
+ * (ver CODE_FIELD em Formacoes.jsx). dc-drift é o keyframe centralizado
+ * em animations.css, reaproveitado também pelos ícones de Tecnologias.
+ */
+.dc-formacoes-code-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.dc-formacoes-code {
+  position: absolute;
+  font-family: var(--dc-mono);
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+
+.dc-formacoes-code--cyan {
+  color: var(--dc-cyan);
+}
+
+.dc-formacoes-code--pink {
+  color: var(--dc-pink);
+}
+
+.dc-formacoes-code--purple {
+  color: var(--dc-purple);
+}
+
+.dc-formacoes-code--yellow {
+  color: var(--dc-yellow);
+}
+
+.dc-formacoes-code.is-drifting {
+  animation-name: dc-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
